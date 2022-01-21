@@ -10,4 +10,4 @@ You can click on the group headings to show/hide the group formulas, and click o
 
 This can be useful when the sheet contains formulas that result in arrays, especially if those formulas are located in a busy sheet.
 
-![alt text](https://drive.google.com/file/d/1k3dyyhqL7SNsq1cIAsvPMS16b9C8KPdU/preview "Script in action")
+![alt text](https://lh3.googleusercontent.com/e4PGCLkav3IFJSHJ1dM--zqUF-bwwxJbhowwp3A2muB8EiHRVyApUdn5TKnj_R59mDd13gGWfiZwpuiNSolf=w1877-h882-rw "Script in action")
