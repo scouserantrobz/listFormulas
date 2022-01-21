@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_blank">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <style>
+      .rowHeader{
+        font-weight:bold;
+        text-align: left;
+        cursor:pointer;
+      }
+      .query, .arrayformula, .sequence, .other {
+        cursor:pointer;
+      }
+    </style>
+    <title>MHDFIPA - Control Panel</title>
+  </head>
+  <body style="overflow-y:scroll">
+    <div id="divMain" class="container-fluid">
+        <div class="row align-items-center">
+          <div class="col" style="text-align: center;padding-top: 1rem;">
+            <div style="text-align:left">
+              Click the header rows to hide/show that group of formulas.<br>Click a formula row to activate the cell contains the formula.
+            </div>
+            <table class="table table-sm">
+              <thead>
+                <tr class="table-primary">
+                  <th style="width:15%">Row,Col #</th>
+                  <th style="width:15%">Cell A1</th>
+                  <th>Expression</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- [[3,5, E3, =QUERY(A3:C8,"SELECT *",0), class="table-success query" onclick="gotoCell(this)"]] -->
+              
+              <?
+                let rowClassName = ""
+                let funcClassName = ""
+                data.forEach( ( group, iG ) => {
+
+                  if ( iG === 0 ){
+                    rowClassName = "success"
+                    funcClassName = "query"
+                  } else if ( iG === 1 ){
+                    rowClassName = "warning"
+                    funcClassName = "arrayformula"
+                  } else if ( iG === 2 ){
+                    rowClassName = "info"
+                    funcClassName = "sequence"
+                  } else {
+                    rowClassName = "light"
+                    funcClassName = "other"
+                  }
+              ?>
+                  <tr class="table-<?= rowClassName ?>" onclick="showHide('<?= funcClassName ?>')">
+                    <td style="text-align:left">
+                      <span class="d-none <?= funcClassName ?>" title="Show formulas"><i class="bi bi-chevron-expand"></i></span>
+                      <span class="<?= funcClassName ?>" title="Hide formulas"><i class="bi bi-chevron-contract"></i></span>
+                    </td>
+                    <td colspan="2" class="rowHeader"><?= funcClassName.toUpperCase() ?> formulas</td>
+                  </tr>
+              <?
+                  group.forEach( r => {
+              ?>
+                    <tr class="table-<?= rowClassName ?> <?= funcClassName ?>" onclick="gotoCell(this)">
+                      <td><?= r[0] ?></td>
+                      <td><?= r[1] ?></td>
+                      <td style="text-align:left"><?= r[2] ?></td>
+                    </tr>
+              <?
+                  })
+                })
+              ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+    <script>
+      function showHide( className ){
+        const elesToSave = document.querySelectorAll("*." + className );
+        elesToSave.forEach( ele => ele.classList.toggle("d-none") )
+      }
+      function gotoCell( tabRow ){
+        const cellAddr = tabRow.children[1].textContent
+        console.log( cellAddr )
+        google.script.run
+          .withSuccessHandler( function(data){
+            console.log("OK")
+          })
+          .withFailureHandler( "gotoCell", gsrError )
+          .gsGotoCell( cellAddr )
+      }
+      function gsrError( funcName, gsrError ){
+        console.log( "Error from " + funcName )
+        console.log( gsrError )
+      }
+    </script>
+  </body>
+</html>
