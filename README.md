@@ -11,5 +11,5 @@ You can click on the group headings to show/hide the group formulas, and click o
 This can be useful when the sheet contains formulas that result in arrays, especially if those formulas are located in a busy sheet.
 
 <dl>
-<img src="https://lh4.googleusercontent.com/PfJxJzjcQApcsL9BnU_RfQrL9hU3Lt1WlPZfEqRQ9YoVyGpxemAB-uQWKY3mnUN7WgWuuAcvqmbkbg=w1877-h882-rw" class="ndfHFb-c4YZDc-HiaYvf-RJLb9c" alt="Displaying listFormulas.gif" aria-hidden="true">
+<img src="https://drive.google.com/uc?export=view&id=1k3dyyhqL7SNsq1cIAsvPMS16b9C8KPdU" alt="Displaying listFormulas.gif" aria-hidden="true">
 </dl>
